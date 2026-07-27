@@ -1,0 +1,34 @@
+services:
+  db:
+    image: mysql:8.4
+    container_name: hotel-booking-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-hotel_booking}
+      MYSQL_USER: ${MYSQL_USER:-hotel_app}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-hotel_app_password}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-local_root_password}
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    volumes:
+      - hotel_booking_mysql_data:/var/lib/mysql
+      - ./database/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-h",
+          "localhost",
+          "-u",
+          "root",
+          "-plocal_root_password"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
+volumes:
+  hotel_booking_mysql_data:
