@@ -10,6 +10,7 @@ const database = mysql.createPool({
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
+  dateStrings: true,
 });
 
 export async function checkDatabaseConnection() {

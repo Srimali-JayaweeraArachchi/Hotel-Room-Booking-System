@@ -18,3 +18,5 @@ Thumbs.db
 
 tmp/
 database/data/
+server/uploads/rooms/*
+!server/uploads/rooms/.gitkeep
