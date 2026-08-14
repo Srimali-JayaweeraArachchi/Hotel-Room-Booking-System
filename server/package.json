@@ -6,19 +6,31 @@
   "scripts": {
     "dev": "node --watch src/server.js",
     "start": "node src/server.js",
-    "lint": "eslint ."
+    "db:migrate": "node src/database/migrate.js",
+    "user:make-admin": "node src/database/makeAdmin.js",
+    "user:make-staff": "node src/database/makeStaff.js",
+    "db:migrate-images": "node src/database/migrateImagesToBlobs.js",
+    "lint": "eslint .",
+    "test": "vitest run"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.3",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
+    "express-rate-limit": "^8.6.2",
     "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.3",
     "morgan": "^1.10.1",
-    "mysql2": "^3.14.3"
+    "multer": "^2.2.0",
+    "mysql2": "^3.14.3",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.34.0",
     "eslint": "^9.34.0",
-    "globals": "^16.3.0"
+    "globals": "^16.3.0",
+    "supertest": "^7.2.2",
+    "vitest": "^4.1.10"
   }
 }

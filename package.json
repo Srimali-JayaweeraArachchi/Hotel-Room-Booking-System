@@ -12,10 +12,15 @@
     "dev:server": "npm run dev --workspace server",
     "build": "npm run build --workspace client",
     "lint": "npm run lint --workspaces --if-present",
+    "test": "npm test --workspaces --if-present",
     "format": "prettier --write .",
     "db:up": "docker compose up -d db",
     "db:down": "docker compose down",
-    "db:logs": "docker compose logs -f db"
+    "db:logs": "docker compose logs -f db",
+    "db:migrate": "npm run db:migrate --workspace server",
+    "user:make-admin": "npm run user:make-admin --workspace server --",
+    "user:make-staff": "npm run user:make-staff --workspace server --",
+    "db:migrate-images": "npm run db:migrate-images --workspace server"
   },
   "engines": {
     "node": ">=20",

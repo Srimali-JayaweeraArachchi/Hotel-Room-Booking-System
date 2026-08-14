@@ -6,7 +6,9 @@ export function notFoundHandler(request, response) {
 }
 
 export function errorHandler(error, _request, response, _next) {
-  const statusCode = error.statusCode ?? 500;
+  const isDuplicateDatabaseEntry = error.code === 'ER_DUP_ENTRY';
+  const isUploadError = error.name === 'MulterError';
+  const statusCode = isDuplicateDatabaseEntry ? 409 : isUploadError ? 400 : (error.statusCode ?? 500);
 
   if (process.env.NODE_ENV !== 'test') {
     console.error(error);
@@ -14,6 +16,15 @@ export function errorHandler(error, _request, response, _next) {
 
   response.status(statusCode).json({
     status: 'error',
-    message: statusCode === 500 ? 'Internal server error' : error.message,
+    message: isDuplicateDatabaseEntry
+      ? 'An account with this email already exists'
+      : isUploadError
+        ? error.code === 'LIMIT_FILE_SIZE'
+          ? 'Each room image must be 5 MB or smaller'
+          : 'Upload a maximum of 10 room images at a time'
+      : statusCode === 500
+        ? 'Internal server error'
+        : error.message,
+    ...(error.details && { details: error.details }),
   });
 }

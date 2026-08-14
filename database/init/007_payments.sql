@@ -1,0 +1,21 @@
+CREATE TABLE IF NOT EXISTS payments (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  booking_id BIGINT UNSIGNED NOT NULL,
+  provider VARCHAR(40) NOT NULL,
+  provider_reference VARCHAR(80) NOT NULL,
+  amount DECIMAL(10, 2) NOT NULL,
+  currency CHAR(3) NOT NULL DEFAULT 'LKR',
+  method VARCHAR(30) NOT NULL,
+  status ENUM('initiated', 'succeeded', 'failed', 'refunded') NOT NULL DEFAULT 'initiated',
+  failure_reason VARCHAR(255) NULL,
+  paid_at TIMESTAMP NULL,
+  refunded_at TIMESTAMP NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY uq_payments_provider_reference (provider_reference),
+  KEY idx_payments_booking_created (booking_id, created_at),
+  KEY idx_payments_status_created (status, created_at),
+  CONSTRAINT fk_payments_booking FOREIGN KEY (booking_id) REFERENCES bookings(id) ON DELETE RESTRICT,
+  CONSTRAINT chk_payments_amount CHECK (amount >= 0)
+);
