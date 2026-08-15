@@ -1,3 +1,5 @@
+// Payment module — database access for payments
+
 import crypto from 'node:crypto';
 import database from '../config/database.js';
 import { createNotificationRecord, createRoleNotificationRecords } from './notificationRepository.js';

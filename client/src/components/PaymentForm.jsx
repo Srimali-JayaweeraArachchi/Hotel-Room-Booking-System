@@ -1,3 +1,5 @@
+// Payment module — card payment form
+
 import { useState } from 'react';
 import { payForBooking } from '../api/paymentApi.js';
 import { getApiErrorMessage } from '../utils/apiError.js';

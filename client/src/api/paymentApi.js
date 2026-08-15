@@ -1,3 +1,5 @@
+// Payment module — frontend API client
+
 import httpClient from './httpClient.js';
 
 export async function payForBooking(bookingId, paymentToken) {

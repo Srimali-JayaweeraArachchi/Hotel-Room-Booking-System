@@ -1,3 +1,5 @@
+// Payment module — request validation
+
 import { z } from 'zod';
 
 const bookingId = z.coerce.number().int().positive();

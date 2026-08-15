@@ -1,3 +1,5 @@
+// Payment module — payment business logic
+
 import { findBookingPayments, findPaymentById, processPaymentRecord } from '../repositories/paymentRepository.js';
 import { AppError } from '../utils/AppError.js';
 

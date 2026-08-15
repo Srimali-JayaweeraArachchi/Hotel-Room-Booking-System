@@ -1,3 +1,5 @@
+// Payment module — handles pay & list-payments requests
+
 import { listGuestBookingPayments, payForGuestBooking } from '../services/paymentService.js';
 
 const send = (response, data, status = 200) => response.status(status).json({ status: 'success', data });

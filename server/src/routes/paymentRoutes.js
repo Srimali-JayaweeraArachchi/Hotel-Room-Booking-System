@@ -1,3 +1,5 @@
+// Payment module — payment API routes
+
 import { Router } from 'express';
 import { listMine, pay } from '../controllers/paymentController.js';
 import { authenticate, authorize } from '../middleware/authenticate.js';

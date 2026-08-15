@@ -1,3 +1,5 @@
+-- Payment module — payments table schema
+
 CREATE TABLE IF NOT EXISTS payments (
   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   booking_id BIGINT UNSIGNED NOT NULL,
